@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+
+{% block title %}{{ "Edit" if item else "Add" }} Item{% endblock %}
+
+{% block content %}
+    <h2>{{ "Edit" if item else "Add" }} Item</h2>
+
+    <form method="post" class="item-form">
+        <label for="name">Name</label>
+        <input type="text" id="name" name="name" required value="{{ item.name if item else '' }}">
+
+        <label for="category">Category</label>
+        <input type="text" id="category" name="category" placeholder="e.g. Pantry, Fridge, Freezer"
+               value="{{ item.category if item else '' }}">
+
+        <label for="quantity">Quantity</label>
+        <input type="number" step="any" id="quantity" name="quantity"
+               value="{{ item.quantity if item else 0 }}">
+
+        <label for="unit">Unit</label>
+        <input type="text" id="unit" name="unit" placeholder="e.g. lbs, boxes, gallons"
+               value="{{ item.unit if item else '' }}">
+
+        <label for="low_stock_threshold">Low stock threshold</label>
+        <input type="number" step="any" id="low_stock_threshold" name="low_stock_threshold"
+               value="{{ item.low_stock_threshold if item else 1 }}">
+
+        <label for="expiration_date">Expiration date</label>
+        <input type="date" id="expiration_date" name="expiration_date"
+               value="{{ item.expiration_date if item else '' }}">
+
+        <label for="notes">Notes</label>
+        <textarea id="notes" name="notes">{{ item.notes if item else '' }}</textarea>
+
+        <div class="form-actions">
+            <button type="submit">{{ "Save changes" if item else "Add item" }}</button>
+            <a href="{{ url_for('index') }}">Cancel</a>
+        </div>
+    </form>
+{% endblock %}
